@@ -1,6 +1,6 @@
 using fluidra.cap.sfmgmt as sfmgmt from '../db/schema-model';
 
-service sfabs_mgmt {
+service sfabs_mgmt @(imp: 'srv/sfabs_mgmt-service.js' ) {
 
     @odata.draft.enabled
     
