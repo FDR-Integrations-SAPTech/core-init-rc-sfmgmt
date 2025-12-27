@@ -25,6 +25,5 @@ modules:
           srv-url: ${default-url}
     requires:
       []
-
 resources:
   []
