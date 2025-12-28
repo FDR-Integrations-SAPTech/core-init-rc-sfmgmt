@@ -4,7 +4,6 @@ version: 1.0.0
 description: "A simple CAP project."
 parameters:
   enable-parallel-deployments: true
-  deploy_mode: html5-repo
 build-parameters:
   before-all:
     - builder: custom
@@ -26,84 +25,6 @@ modules:
           srv-url: ${default-url}
     requires:
       []
-  - name: sf_abs_management
-    type: approuter.nodejs
-    path: app/router
-    parameters:
-      keep-existing-routes: true
-      disk-quota: 256M
-      memory: 256M
-    requires:
-      - name: srv-api
-        group: destinations
-        properties:
-          name: srv-api # must be used in xs-app.json as well
-          url: ~{srv-url}
-          forwardAuthToken: true
-      - name: sf_abs_management-html5-runtime
-      - name: sf_abs_management-portal
-    provides:
-      - name: app-api
-        properties:
-          app-protocol: ${protocol}
-          app-uri: ${default-uri}
-
-  - name: sf_abs_management-app-deployer
-    type: com.sap.application.content
-    path: gen
-    requires:
-      - name: srv-api
-      - name: sf_abs_management-html5-repo-host
-        parameters:
-          content-target: true
-          config:
-            HTML5Runtime_enabled: true
-      - name: sf_abs_management-app-front
-        parameters:
-          content-target: true
-    build-parameters:
-      build-result: app/
-      requires:
-        - name: sf_abs_managementsfabsmgmt
-          artifacts:
-            - sfabsmgmt.zip
-          target-path: app/
-    parameters:
-      config:
-        destinations:
-          - name: srv-api
-            url: ~{srv-api/srv-url}
-            forwardAuthToken: true
-          - name: ui5
-            url: https://ui5.sap.com
-
-  - name: sf_abs_managementsfabsmgmt
-    type: html5
-    path: app/sfabsmgmt
-    build-parameters:
-      build-result: dist
-      builder: custom
-      commands:
-        - npm ci
-        - npm run build
-      supported-platforms:
-        []
-
-  - name: sf_abs_management-portal-deployer
-    type: com.sap.application.content
-    path: app/portal
-    requires:
-      - name: sf_abs_management-portal
-        parameters:
-          content-target: true
-          service-key:
-            name: sf_abs_management-portal-key
-            config:
-              content-endpoint: developer
-      - name: sf_abs_management-html5-repo-host
-      - name: sf_abs_management-app-deployer
-    deployed-after:
-      - sf_abs_management-app-deployer
 resources:
   - name: template-cap-auth
     type: org.cloudfoundry.managed-service
@@ -114,24 +35,3 @@ resources:
       config:
         xsappname: template-cap-${org}-${space}
         tenant-mode: dedicated
-
-  - name: sf_abs_management-html5-repo-host
-    type: org.cloudfoundry.managed-service
-    parameters:
-      service: html5-apps-repo
-      service-plan: app-host
-  - name: sf_abs_management-html5-runtime
-    type: org.cloudfoundry.managed-service
-    parameters:
-      service: html5-apps-repo
-      service-plan: app-runtime
-  - name: sf_abs_management-portal
-    type: org.cloudfoundry.managed-service
-    parameters:
-      service: portal
-      service-plan: standard
-  - name: sf_abs_management-app-front
-    type: org.cloudfoundry.managed-service
-    parameters:
-      service: app-front
-      service-plan: developer
