@@ -25,8 +25,8 @@
     "cds-plugin-ui5": "^0.13.0"
   },
   "scripts": {
-    "ci:cds-build": "cds build --production",
-    "start": "cds run --production",
+    "ci:cds-build": "npx cds build --production",
+    "start": "npx cds run --production",
     "watch-sfabshrsmgmt": "cds watch --open com.fluidra.rc.sfabshrsmgmt/index.html?sap-ui-xx-viewCache=false --livereload false",
     "watch-sfabsmanagement": "cds watch --open com.fluidra.rc.sfabsmanagement/index.html?sap-ui-xx-viewCache=false --livereload false",
     "watch-sfabsmgmt": "cds watch --open rc.com.fluidra.sfabsmgmt/index.html?sap-ui-xx-viewCache=false --livereload false"
