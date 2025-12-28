@@ -24,7 +24,7 @@
     "@sap/cds-dk": "^9",
     "cds-plugin-ui5": "^0.13.0"
   },
-  "scripts": {    
+  "scripts": {
     "ci:cds-build": "cds build --production",
     "start": "cds-serve",
     "watch-sfabshrsmgmt": "cds watch --open com.fluidra.rc.sfabshrsmgmt/index.html?sap-ui-xx-viewCache=false --livereload false",
@@ -43,7 +43,10 @@
         "credentials": {
           "url": "db.sqlite"
         }
-      }
+      },
+      "html5-repo": true,
+      "portal": true,
+      "app-front": true
     }
   },
   "workspaces": [
