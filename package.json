@@ -24,13 +24,8 @@
     "@sap/cds-dk": "^9",
     "cds-plugin-ui5": "^0.13.0"
   },
-<<<<<<< HEAD
   "scripts": {
     "ci:cds-build": "cds build --production",  
-=======
-  "scripts": {    
-    "ci:cds-build": "cds build --production",
->>>>>>> parent of 5e60a14 (build and dep)
     "start": "cds-serve",
     "watch-sfabshrsmgmt": "cds watch --open com.fluidra.rc.sfabshrsmgmt/index.html?sap-ui-xx-viewCache=false --livereload false",
     "watch-sfabsmanagement": "cds watch --open com.fluidra.rc.sfabsmanagement/index.html?sap-ui-xx-viewCache=false --livereload false",
