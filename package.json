@@ -27,12 +27,7 @@
   },
 
   "scripts": {
-    "start": "node node_modules/@sap/cds/bin/cds.js run --production",
-    "ci:cds-build": "node node_modules/@sap/cds-dk/bin/cds.js build --production",
-
-    "watch-sfabshrsmgmt": "cds watch --open com.fluidra.rc.sfabshrsmgmt/index.html?sap-ui-xx-viewCache=false --livereload false",
-    "watch-sfabsmanagement": "cds watch --open com.fluidra.rc.sfabsmanagement/index.html?sap-ui-xx-viewCache=false --livereload false",
-    "watch-sfabsmgmt": "cds watch --open rc.com.fluidra.sfabsmgmt/index.html?sap-ui-xx-viewCache=false --livereload false"
+    "start": "cds run --production"
   },
 
   "cds": {

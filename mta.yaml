@@ -9,19 +9,19 @@ parameters:
 build-parameters:
   before-all:
     - builder: custom
-      commands:
-        - npm ci
+      commands:       
+        - npm ci        
         - node node_modules/@sap/cds-dk/bin/cds.js build --production
 
 modules:
   - name: sf_abs_management-srv
     type: nodejs
-    path: .                         
+    path: .                       
     parameters:
       instances: 1
       buildpack: nodejs_buildpack
     build-parameters:
-      npm-install: true            
+      npm-install: true             
     provides:
       - name: srv-api
         properties:
