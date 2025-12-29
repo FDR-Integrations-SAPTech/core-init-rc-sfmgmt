@@ -26,7 +26,7 @@
 
   "scripts": {
     "ci:cds-build": "npx cds build --production",
-    "start": "node ./node_modules/@sap/cds/bin/cds.js run --production"
+    "start": "cds run --production"
   },
 
   "cds": {
