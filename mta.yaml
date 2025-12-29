@@ -2,40 +2,41 @@ _schema-version: 3.3.0
 ID: sf_abs_management
 version: 1.0.0
 description: "A simple CAP project."
-
 parameters:
   enable-parallel-deployments: true
-
 build-parameters:
   before-all:
     - builder: custom
-      commands:       
+      commands:
         - npm ci
-        - npx @sap/cds-dk cds build --production
-
+        - npx cds build --production
 modules:
   - name: sf_abs_management-srv
     type: nodejs
-    path: .                       
+    path: gen/srv
     parameters:
       instances: 1
       buildpack: nodejs_buildpack
     build-parameters:
-      npm-install: true             
+      builder: npm-ci
     provides:
-      - name: srv-api
+      - name: srv-api # required by consumers of CAP services (e.g. approuter)
         properties:
           srv-url: ${default-url}
     requires:
-      - name: template-cap-auth
+      - name: sf_abs_management-auth
 
 resources:
-  - name: template-cap-auth
+  - name: sf_abs_management-auth
     type: org.cloudfoundry.managed-service
     parameters:
       service: xsuaa
       service-plan: application
       path: ./xs-security.json
       config:
-        xsappname: template-cap-${org}-${space}
+        xsappname: sf_abs_management-${org}-${space}
         tenant-mode: dedicated
+        oauth2-configuration:
+          credential-types:
+            - "binding-secret"
+            - "x509"
