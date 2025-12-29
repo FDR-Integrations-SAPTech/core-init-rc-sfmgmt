@@ -18,7 +18,8 @@ modules:
       instances: 1
       buildpack: nodejs_buildpack
     build-parameters:
-      builder: npm-ci
+      builder: npm-ci,
+      npm-install: true
     provides:
       - name: srv-api # required by consumers of CAP services (e.g. approuter)
         properties:
