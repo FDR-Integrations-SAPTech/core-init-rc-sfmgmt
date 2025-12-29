@@ -10,17 +10,18 @@ build-parameters:
   before-all:
     - builder: custom
       commands:
-        - npx cds build --production   # ✅ model build only
+        - npm ci
+        - node node_modules/@sap/cds-dk/bin/cds.js build --production
 
 modules:
   - name: sf_abs_management-srv
     type: nodejs
-    path: .
+    path: .                         
     parameters:
       instances: 1
       buildpack: nodejs_buildpack
     build-parameters:
-      npm-install: true               # ✅ runtime deps
+      npm-install: true            
     provides:
       - name: srv-api
         properties:
@@ -35,4 +36,6 @@ resources:
       service: xsuaa
       service-plan: application
       path: ./xs-security.json
-
+      config:
+        xsappname: template-cap-${org}-${space}
+        tenant-mode: dedicated

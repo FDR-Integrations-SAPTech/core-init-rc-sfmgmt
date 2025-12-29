@@ -1,17 +1,19 @@
 {
   "name": "sf_abs_management",
   "version": "1.0.0",
-  "description": "A simple CAP project",
+  "description": "A simple CAP project.",
   "private": true,
 
   "dependencies": {
     "@sap/cds": "^9.5.2",
     "@cap-js/sqlite": "^2.1.2",
     "@cap-js-community/odata-v2-adapter": "^1.15.7",
+    "@sap/cds-odata-v2-adapter-proxy": "^1.9.7",
+
     "@sap-cloud-sdk/connectivity": "^4.2.0",
     "@sap-cloud-sdk/http-client": "^4.2.0",
     "@sap-cloud-sdk/resilience": "^4.2.0",
-    "@sap/cds-odata-v2-adapter-proxy": "^1.9.7",
+
     "express": "^4",
     "compression": "^1.8.1"
   },
@@ -25,14 +27,18 @@
   },
 
   "scripts": {
-    "ci:cds-build": "npx cds build --production",
-    "start": "cds run --production"
+    "start": "cds run --production",
+    "ci:cds-build": "node node_modules/@sap/cds-dk/bin/cds.js build --production",
+
+    "watch-sfabshrsmgmt": "cds watch --open com.fluidra.rc.sfabshrsmgmt/index.html?sap-ui-xx-viewCache=false --livereload false",
+    "watch-sfabsmanagement": "cds watch --open com.fluidra.rc.sfabsmanagement/index.html?sap-ui-xx-viewCache=false --livereload false",
+    "watch-sfabsmgmt": "cds watch --open rc.com.fluidra.sfabsmgmt/index.html?sap-ui-xx-viewCache=false --livereload false"
   },
 
   "cds": {
     "requires": {
       "auth": {
-        "kind": "basic"
+        "kind": "xsuaa"
       },
       "db": {
         "kind": "sqlite",
