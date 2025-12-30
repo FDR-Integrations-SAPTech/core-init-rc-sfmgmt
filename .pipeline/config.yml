@@ -1,0 +1,15 @@
+---
+stages:
+  build:
+    buildTool: "mta"
+    buildDescriptor: "mta.yaml"
+    buildToolVersion: "MBTJ21N22"
+  malwareScan:
+    scan: false
+  release:
+    cfDeploy:
+      strategy: "default"
+      apiEndpoint: "https://api.cf.eu10-004.hana.ondemand.com/"
+      org: "fluidra-sap-core-dev"
+      space: "dev"
+      credential: "btp-technical-user-custom-idp"

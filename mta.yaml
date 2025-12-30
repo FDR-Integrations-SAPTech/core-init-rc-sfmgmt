@@ -36,7 +36,3 @@ resources:
       config:
         xsappname: sf_abs_management-${org}-${space}
         tenant-mode: dedicated
-        oauth2-configuration:
-          credential-types:
-            - "binding-secret"
-            - "x509"
